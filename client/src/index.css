@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  /* font-family: 'Raleway', sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+

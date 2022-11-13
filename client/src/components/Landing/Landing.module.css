@@ -1,0 +1,43 @@
+
+
+.app{
+    background-image: url('../../resources/Elementos/elementos_landing/Fondo.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo{
+    width: 65%;
+margin-top: -13%;
+margin-left: 20%;
+margin-right: 20%;
+    /* margin-bottom: 5%; */
+}
+.image{
+    /* background-size: contain; */
+    background-position: initial;
+    width: 450px;
+    /* margin-top: 5%; */
+    /* height: 25vw; */
+    /* margin: 0 auto; */
+    
+}
+
+.font{
+    /* display: flex; */
+    text-align: center;
+    font-size: 25px;
+    /* flex-wrap: wrap; */
+}
+
+.image:hover {
+    -webkit-transform:scale(1.0);transform:scale(1.1);
+}

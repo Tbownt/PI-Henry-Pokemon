@@ -1,0 +1,43 @@
+.pokeball {
+    display: flow-root;
+    background: url('https://media.tenor.com/a-nFOu2Gmg4AAAAi/dddd.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 10rem;
+    margin: auto;
+    /* padding: 2%; */
+    width: 100vh;
+    height: 100vh;
+    text-align: center;
+    
+}
+
+.loading {
+    display: inline-block;
+    padding: 21%;
+    /* padding-top: 70%; */
+    font-size: 40px;
+    animation: saltar 2.2s infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in;
+    transform: translatey(0);
+    /* text-align: center; */
+}
+
+@keyframes saltar {
+    0%{
+    transform: translatey(0);
+    }
+    25%{
+        transform: translateY(25px);
+    }
+    50% {
+        transform: translatey(50px)
+    } 
+    75% {
+        transform: translatey(75px)
+    }
+    100% {
+        transformy: translatey(100px)
+    }
+}

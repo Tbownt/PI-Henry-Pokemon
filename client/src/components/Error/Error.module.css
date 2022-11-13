@@ -1,0 +1,24 @@
+.app{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-align: center;
+    background-color: #026842;
+    padding: 4.4%;
+}
+.parrafo{
+    font-size: 30px;
+}
+.link{
+    display: block;
+    color: #171718;
+    margin-top: 5%;
+}
+.link:hover{
+    color: #F5F5F5;
+    
+}
+.image{
+    /* margin-top: 2.5%; */
+    width: 35%;
+}

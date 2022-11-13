@@ -1,0 +1,7 @@
+.container{
+    background-image: url('../../resources/Elementos/elementos_pagina/Fondo\ Ejemplo\ Patrón\ 1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+}
