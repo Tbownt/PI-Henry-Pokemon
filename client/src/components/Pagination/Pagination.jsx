@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Pagination.module.css";
+
 const Pagination = ({ showPerPage, pokemons, paginate, page }) => {
   const pageNumber = [];
   const total = Math.ceil(pokemons / showPerPage);
@@ -12,7 +13,7 @@ const Pagination = ({ showPerPage, pokemons, paginate, page }) => {
       <button
         className={styles.btn}
         onClick={page > 1 ? () => paginate(page - 1) : null}
-        hidden={page === 1 ? true : false}
+        disabled={page === 1 ? true : false}
       >
         Prev
       </button>
@@ -30,8 +31,8 @@ const Pagination = ({ showPerPage, pokemons, paginate, page }) => {
         })}
       <button
         className={styles.btn}
-        onClick={page < 4 ? () => paginate(page + 1) : null}
-        hidden={page === 4 ? true : false}
+        onClick={page < total ? () => paginate(page + 1) : null}
+        disabled={page === total ? true : false}
       >
         Next
       </button>

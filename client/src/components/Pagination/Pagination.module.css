@@ -8,14 +8,14 @@
     width: 50px;
     height: 25px;
     cursor: pointer;
-    background: transparent;
-    border: 1px solid #91C9FF;
+    background: #f9db5c;
+    border: 1px solid #5ccda7;
     border-radius: 15%;
     outline: none;
     transition: 1s ease-in-out;
 }
 
 .btn:hover {
-    transition: 1s ease-in-out;
-    background: #4F95DA;
+    transition: 0.5s ease-in-out;
+    background: #5ccda7;
 }

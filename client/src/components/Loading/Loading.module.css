@@ -1,11 +1,11 @@
 .pokeball {
-    display: flow-root;
+    display: block;
     background: url('https://media.tenor.com/a-nFOu2Gmg4AAAAi/dddd.gif');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 10rem;
     margin: auto;
-    /* padding: 2%; */
+    /* padding: 15%; */
     width: 100vh;
     height: 100vh;
     text-align: center;

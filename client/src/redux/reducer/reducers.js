@@ -45,14 +45,44 @@ switch(action.type) {
         return {
         ...state, types: action.payload
     }
+
+    //Ordenamientos
+
     case ORDER_BY_NAME: 
-        return {
-        ...state,
-    }
+        let allPokemons = state.pokemons;
+            let sortedName = action.payload === 'asc' ?
+                allPokemons.sort((a, b) => {
+                    return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+                }) :
+                allPokemons.sort((a, b) => {
+                    return b.name.toLowerCase().localeCompare(a.name.toLowerCase())
+                })
+            return {
+                ...state,
+                pokemons: sortedName
+            };   
+    
     case ORDER_BY_ATTACK:
-        return {
-            ...state
-    }
+        const orderAttack = action.payload 
+        if(orderAttack === 'AttackAsc')
+            return {
+                ...state,
+                pokemons:  state.pokemons.sort((a, b) =>  b.attack - a.attack)
+            }
+        else if(orderAttack === 'AttackDesc')
+            return {
+                ...state,
+                pokemons: state.pokemons.sort((a, b) => a.attack - b.attack)
+            } 
+        else {
+            return {
+                ...state
+            }
+        }
+            
+     
+
+    //Filtros
 
     case FILTER_BY_TYPE: 
     let type = action.payload;
@@ -69,24 +99,22 @@ switch(action.type) {
         }
     }
     case FILTER_BY_CREATED:
-        let created = state.pokemons.filter(p=> typeof p.id === 'string') //uuid
-        let api = state.pokemons.filter(p=> typeof p.id === 'number') // api
-        if(action.payload === created){
-            return {
-                ...state, pokemons: created
-            }
-        } else if (action.payload === api) {
-            return {
-                ...state, pokemons: api
-            }
-        } else {
-            return {
-                ...state, pokemons: state.pokemons
+       
+       let created = state.pokemons.filter(p => typeof p.id === 'string');
+       let api = state.pokemons.filter(p => typeof p.id === 'number');
+       if(action.payload === "created") {
+        return {
+            ...state, pokemons: created
         }
+       } else if (action.payload === "api") {
+        return {
+            ...state, pokemons: api
         }
+       } 
+       break;
     case RESET_FILTER: 
     return {
-        ...state, pokemons: state.pokemons
+        ...state, pokemons: []
     }
     case CLEAR_STATE: 
     return {

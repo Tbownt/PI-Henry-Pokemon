@@ -1,8 +1,17 @@
 .container{
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: fit-content(100%);
+    grid-auto-columns: auto;
+    width: 50%;
+    border-radius: 30px;
+    border-color: black solid;
+    background-color: #f9db5c;
 }
 
+.image{
+    width: 55%;
+}
 
 .link{
     color: rgb(10, 107, 10);

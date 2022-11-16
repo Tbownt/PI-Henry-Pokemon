@@ -6,9 +6,9 @@ const Card = ({ id, name, image, types }) => {
   return (
     <div className={styles.container}>
       <img src={image} alt="not found" className={styles.image} />
-      <h2>Name: {name}</h2>
+      <h2>Name: {name.charAt(0).toUpperCase() + name.substring(1)}</h2>
       <h3>
-        Type:{" "}
+        Types:{" "}
         {types
           .map((t) => t.charAt(0).toUpperCase() + t.substring(1))
           .join(" - ")}

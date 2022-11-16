@@ -3,8 +3,12 @@
     flex-flow: column;
     align-items: center;
     text-align: center;
-    background-color: #026842;
-    padding: 4.4%;
+    background-image: url('../../resources/Elementos/elementos_pagina/Fondo\ Ejemplo\ Líneas\ 2.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    padding: 4.2%;
 }
 .parrafo{
     font-size: 30px;

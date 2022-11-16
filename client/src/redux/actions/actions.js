@@ -58,20 +58,6 @@ export const getPokemonById = (id) => {
     };
 };
 
-export const createPokemon = (pokemon) => {
-    return async function(dispatch) {
-        try {
-            const create = await axios.post('http://localhost:3001/pokemons', pokemon)
-            return dispatch({
-                type: CREATE_POKEMON,
-                payload: create,
-            });
-        } catch (error) {
-            return "Something went wrong. Please try again."
-        }
-    };
-};
-
 export const getPokemonTypes = () => {
     return async function(dispatch) {
         try {
@@ -86,6 +72,27 @@ export const getPokemonTypes = () => {
     };
 };
 
+export const createPokemon = (pokemon) => {
+    return async function(dispatch) {
+        try {
+            const create = await axios.post('http://localhost:3001/pokemons', pokemon)
+            return dispatch({
+                type: CREATE_POKEMON,
+                create,
+            });
+        } catch (error) {
+            return "Something went wrong. Please try again."
+        }
+    };
+};
+
+
+export const orderByName = (name) => {
+    return {
+        type: ORDER_BY_NAME,
+        payload: name,
+    };
+};
 
 export const orderByAttack = (order) => {
     return {
@@ -94,12 +101,6 @@ export const orderByAttack = (order) => {
     };
 }; 
 
-export const orderByName = (name) => {
-    return {
-        type: ORDER_BY_ATTACK,
-        payload: name,
-    };
-};
 
 export const filterByType = (filter) => {
     return {
@@ -116,7 +117,10 @@ export const filterByCreated = (filter) => {
 };
 
 export const resetFilter = () => {
-    return {type: RESET_FILTER}
+    return {
+    type: RESET_FILTER, 
+    payload: []
+}
 }
 export const resetState = () => {
     return {type: CLEAR_STATE}
