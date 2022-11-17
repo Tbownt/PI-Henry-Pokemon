@@ -1,0 +1,27 @@
+.container{
+    background-image: url('../../resources/Elementos/elementos_pagina/Fondo\ Ejemplo\ Patrón\ 1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    margin: 0 auto;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    /* height: 20%; */
+}
+.containerForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    flex-flow: column wrap;
+}

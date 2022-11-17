@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { getPokemonById, resetState } from "../../redux/actions/actions";
 import Loading from "../Loading/Loading";
 
@@ -8,6 +9,10 @@ const CardDetail = (props) => {
   const idParams = props.match.params.id;
   const dispatch = useDispatch();
   const pokemon = useSelector((state) => state.pokemon);
+
+  const reset = () => {
+    dispatch(resetState());
+  };
 
   useEffect(() => {
     // dispatch(getAllPokemons());
@@ -17,6 +22,9 @@ const CardDetail = (props) => {
 
   return (
     <div>
+      <Link to={"/home"} onClick={() => reset()}>
+        Back to Home
+      </Link>
       {pokemon.name !== undefined ? (
         <div>
           <h2>
@@ -34,7 +42,6 @@ const CardDetail = (props) => {
           <p>SPEED: {pokemon.speed}</p>
           <p>HEIGHT: {pokemon.height}</p>
           <p>WEIGHT: {pokemon.weight}</p>
-          {console.log(pokemon.image)}
           <img src={pokemon.image} alt="img not found" />
         </div>
       ) : (

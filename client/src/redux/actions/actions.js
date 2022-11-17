@@ -39,7 +39,7 @@ export const getPokemonByName = (name) => {
                 payload: response.data,
             });
         } catch (error) {
-            return "Something went wrong. Please try again."
+            console.log(error.message)
         }
     };
 };
@@ -78,7 +78,7 @@ export const createPokemon = (pokemon) => {
             const create = await axios.post('http://localhost:3001/pokemons', pokemon)
             return dispatch({
                 type: CREATE_POKEMON,
-                create,
+                payload: create,
             });
         } catch (error) {
             return "Something went wrong. Please try again."

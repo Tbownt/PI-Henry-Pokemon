@@ -9,6 +9,7 @@ import {
 import styles from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
 import SearchBar from "../SearchBar/SearchBar";
+import create from "../../resources/Elementos/elementos_pagina/muestra/4.png";
 import { Link, useHistory } from "react-router-dom";
 
 const NavBar = ({ setPage, types }) => {
@@ -80,15 +81,16 @@ const NavBar = ({ setPage, types }) => {
         <option value="" hidden>
           Filter by
         </option>
-        <option value="default" onClick={() => reset()}>
-          default
-        </option>
+
         <option value="created">Created</option>
         <option value="api">API</option>
       </select>
       <button onClick={() => reset()}>↺</button>
-
-      <Link to="/create">Create your Pokemon</Link>
+      <div className={styles.link}>
+        <Link to={"/create"}>
+          <img src={create} alt="not found" className={styles.image} />
+        </Link>
+      </div>
     </div>
   );
 };

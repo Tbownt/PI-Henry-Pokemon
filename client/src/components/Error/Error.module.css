@@ -9,6 +9,7 @@
     background-size: cover;
     background-position: center center;
     padding: 4.2%;
+    min-height: 100vh;
 }
 .parrafo{
     font-size: 30px;

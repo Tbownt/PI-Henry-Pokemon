@@ -4,6 +4,7 @@
     background-attachment: fixed;
     background-size: cover;
     background-position: center center;
+    min-height: 100vh;
     padding: 2%;
     display: flex;
     width: 100%;

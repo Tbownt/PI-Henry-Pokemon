@@ -1,9 +1,9 @@
-const { Router } = require('express')
-const router = Router()
-const {Pokemon, Type} = require('../db')
-const axios = require('axios')
+const { Router } = require('express');
+const router = Router();
+const {Pokemon, Type} = require('../db');
+const axios = require('axios');
+const { Op } = require("sequelize");
 // const { v4: uuidv4 } = require('uuid');
-const { Op } = require('sequelize')
 
 router.post('/', async (req, res) => {
    const {
@@ -117,103 +117,112 @@ router.get('/', async (req, res) => {
 
  res.status(200).send(getAllPokemons);
 } else {
-  let pokemonByNameDB = await Pokemon.findAll({
-    where: {name: {[Op.iLike]: `%${name}%`}}, //Gracias al operador iLike busco por name sin problemas de keysensitive 
-    include: { model: Type, attributes: ["name"] }
-  })
-
-  let queryFromDB = pokemonByNameDB.map((element) => {
-    return {
-       id: element.id,
-       name:
-       element.name.trim().toLowerCase().charAt(0).toUpperCase() +
-       element.name.substring(1),
-       hp: element.hp,
-       attack: element.attack,
-       defense: element.defense,
-       speed: element.speed,
-       height: element.height,
-       weight: element.weight,
-       types: element.Types.map((index) => index.name),
-       image: element.image,
-    }
-  });
- if(queryFromDB.length > 0) {
-  return res.status(200).send(queryFromDB); //aqui pregunto si mi base de datos contiene el name mediante el length y si lo tiene, lo envio
-} else {
-  let pokemonByNameAPI = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
-  let queryFromAPI =  {
-        id: pokemonByNameAPI.data.id,
-        name: pokemonByNameAPI.data.name,
-        hp: pokemonByNameAPI.data.stats[0].base_stat,
-        attack: pokemonByNameAPI.data.stats[1].base_stat,
-        defense: pokemonByNameAPI.data.stats[2].base_stat,
-        speed: pokemonByNameAPI.data.stats[5].base_stat,
-        height: pokemonByNameAPI.data.height,
-        weight: pokemonByNameAPI.data.weight,
-        types: pokemonByNameAPI.data.types.map((t) => t.type.name),
-        image: pokemonByNameAPI.data.sprites.other["official-artwork"]['front_default'],
-    }
- 
- if(queryFromAPI.name) return res.status(200).send(queryFromAPI); //Si el pokemon buscado por query esta en la api, lo devuelvo
- res.status(404).send("There's no Pokemons with that name.")
-}
-
+  try {
+    let pokemonByNameDB = await Pokemon.findAll({
+      where: { name: { [Op.iLike]: `%${name}%` } }, //con el operador iLike busco por name sin problemas de keysensitive 
+      include: { model: Type, attributes: ["name"] }
+    })
+    let queryFromDB = pokemonByNameDB.map((element) => {
+      return {
+         id: element.id,
+         name:
+         element.name.trim().toLowerCase().charAt(0).toUpperCase() +
+         element.name.substring(1),
+         hp: element.hp,
+         attack: element.attack,
+         defense: element.defense,
+         speed: element.speed,
+         height: element.height,
+         weight: element.weight,
+         types: element.Types.map((index) => index.name),
+         image: element.image,
+      }
+    });
+   if(queryFromDB.length > 0) {
+    return res.status(200).send(queryFromDB); //aqui pregunto si mi base de datos contiene el name mediante el length y si lo tiene, lo envio
+  } else if (!queryFromDB.length > 0){
+    let pokemonByNameAPI = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
+    let queryFromAPI =  {
+          id: pokemonByNameAPI.data.id,
+          name: pokemonByNameAPI.data.name,
+          hp: pokemonByNameAPI.data.stats[0].base_stat,
+          attack: pokemonByNameAPI.data.stats[1].base_stat,
+          defense: pokemonByNameAPI.data.stats[2].base_stat,
+          speed: pokemonByNameAPI.data.stats[5].base_stat,
+          height: pokemonByNameAPI.data.height,
+          weight: pokemonByNameAPI.data.weight,
+          types: pokemonByNameAPI.data.types.map((t) => t.type.name),
+          image: pokemonByNameAPI.data.sprites.other["official-artwork"]['front_default'],
+      }
+   
+   return res.status(200).send(queryFromAPI); //Si el pokemon buscado por query esta en la api, lo devuelvo
+  } 
+  } catch (error) {
+    res.status(404).send("I couldn't find any Pokemon with that name")
+  }
 }
 } catch (error) {
    res.status(404).send(error.message)    
 }
 })
 
-router.get('/:idPokemon', async (req, res) => {
-const {idPokemon} = req.params;
+router.get("/:idPokemon", async (req, res) => {
+  const { idPokemon } = req.params;
 
- if(idPokemon.length > 4) {
+  if (idPokemon.length > 4) {
+    try {
+      const dbPokemonID = await Pokemon.findOne({
+        where: {
+          id: idPokemon,
+        },
+        include: {
+          model: Type,
+          attributes: ["name"],
+        },
+      });
+
+      const formatIDpokemon = {
+        id: dbPokemonID.id,
+        name:
+          dbPokemonID.name.trim().toLowerCase().charAt(0).toUpperCase() +
+          dbPokemonID.name.substring(1),
+        hp: dbPokemonID.hp,
+        attack: dbPokemonID.attack,
+        defense: dbPokemonID.defense,
+        speed: dbPokemonID.speed,
+        height: dbPokemonID.height,
+        weight: dbPokemonID.weight,
+        types: dbPokemonID.Types.map((t) => t.name),
+        image: dbPokemonID.image,
+      };
+
+      if (dbPokemonID) return res.status(200).json(formatIDpokemon);
+    } catch (error) {
+      return res.status(404).send("No se encontró un Pokemon con ese ID");
+    }
+  }
+
   try {
-    const idPokemonDB = await Pokemon.findByPk( idPokemon, {
-      include: {
-        model: Type, 
-        attributes: ["name"],
-      },
-    });
-//Para este caso en particular me fijo si el id pasado por params tiene mas de 4 digitos ya que son el maximo que tiene la api
-//De ser este el caso, busca en la db
-    const pokemonInfo = {
-      id: idPokemonDB.id,
-      name: idPokemonDB.name.trim().toLowerCase().charAt(0) +
-      idPokemonDB.name.substring(1),
-      hp: idPokemonDB.hp,
-      attack: idPokemonDB.attack,
-      speed: idPokemonDB.speed,
-      height: idPokemonDB.height,
-      weight: idPokemonDB.weight,
-      types: idPokemonDB.Types.map((t) => t.name)
+    const apiPokemonID = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${idPokemon}`
+    );
+    const matchedPokemon = {
+      id: apiPokemonID.data.id,
+      name: apiPokemonID.data.name,
+      hp: apiPokemonID.data.stats[0].base_stat,
+      attack: apiPokemonID.data.stats[1].base_stat,
+      defense: apiPokemonID.data.stats[2].base_stat,
+      speed: apiPokemonID.data.stats[5].base_stat,
+      height: apiPokemonID.data.height,
+      weight: apiPokemonID.data.weight,
+      types: apiPokemonID.data.types.map((t) => t.type.name),
+      image: apiPokemonID.data.sprites.other["official-artwork"]['front_default'],
     };
-    if(idPokemonDB) return res.status(200).send(pokemonInfo);
+
+    return res.status(200).json(matchedPokemon);
   } catch (error) {
-    res.status(404).send("There's no Pokemons with that ID.")
+    res.status(404).send("I couldn't find any Pokemon that match with that ID");
   }
- }
-
- try {
-  const idPokemonAPI = await axios.get(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`);
-  const pokemonFound = {
-        id: idPokemonAPI.data.id,
-        name: idPokemonAPI.data.name,
-        hp: idPokemonAPI.data.stats[0].base_stat,
-        attack: idPokemonAPI.data.stats[1].base_stat,
-        defense: idPokemonAPI.data.stats[2].base_stat,
-        speed: idPokemonAPI.data.stats[5].base_stat,
-        height: idPokemonAPI.data.height,
-        weight: idPokemonAPI.data.weight,
-        types: idPokemonAPI.data.types.map((t) => t.type.name),
-        image: idPokemonAPI.data.sprites.other["official-artwork"]['front_default'],
-  }
-  return res.status(200).send(pokemonFound)
-
- } catch (error) {
-  res.status(404).send("I couldn't find any Pokemon with that ID.");
- }
 });
 
 

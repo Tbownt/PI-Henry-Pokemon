@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getPokemonByName } from "../../redux/actions/actions";
 
 const SearchBar = () => {
-  return <div>SearchBar</div>;
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  let history = useHistory();
+  // const allPokemons = useSelector((state) => state.pokemons);
+
+  const handleInputChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getPokemonByName(name));
+    history.push(`/pokemons/${name}`);
+    setName("");
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={name}
+        onChange={handleInputChange}
+        placeholder="Search for a Pokemon..."
+        onClick={() => setName("")}
+      />
+    </form>
+  );
 };
 
 export default SearchBar;
