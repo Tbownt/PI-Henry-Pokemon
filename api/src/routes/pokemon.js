@@ -21,8 +21,10 @@ router.post('/', async (req, res) => {
 
    let {name} = req.body;
    name.toLowerCase(); //me aseguro de que el name que se pase este en minusculas
-      if (!name || name.trim() === "") //Pregunto si existe un name o si esta vacio quitanlo los espacios sobrantes
-       res.status(400).send("Name is required.");
+      if (!name || name.trim() === "") {
+      return res.status(400).send("Name is required.");
+      }
+      //Pregunto si existe un name o si esta vacio quitanlo los espacios sobrantes
      let types = ["unknown"];
      if (!type1 && !type2) {
        types = ["unknown"];
@@ -56,7 +58,7 @@ router.post('/', async (req, res) => {
    let assignTypes = await Promise.all(
       types.map((type) => Type.findOne({ where: { name: type } }))
     );
-    //Tengo que buscar en mi DB los o el type que coincida con el pokemon que voy a crear
+    //Tengo que buscar en mi DB el o los type que coincida con el pokemon que voy a crear
 
    newPokemon.setTypes(assignTypes);
    //y a mi nuevo pokemon se los seteo
@@ -123,7 +125,7 @@ router.get('/', async (req, res) => {
       include: { model: Type, attributes: ["name"] }
     })
     if(found) {
-      let foundBETTER = {
+      let queryFromDB = {
       id: found.id,
       name: found.name,
       hp: found.hp,
@@ -135,7 +137,7 @@ router.get('/', async (req, res) => {
       types: found.Types.map(i => i.name),
       image: found.image
       } 
-      return res.status(200).send(foundBETTER); //retorno mi pokemon una vez encontrado en la db
+      return res.status(200).send(queryFromDB); //retorno mi pokemon una vez encontrado en la db
     } else {
 
    

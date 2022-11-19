@@ -15,13 +15,16 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let match = allPokemons.find((p) => p.name === name);
+    let match = allPokemons.find(
+      (p) =>
+        p.name.trim().toLocaleLowerCase() === name.trim().toLocaleLowerCase()
+    );
     if (match) {
       dispatch(getPokemonByName(match.name));
       history.push(`/pokemons/${match.name}`);
       setName("");
     } else {
-      alert("OOOOOOOOOOOOOO");
+      alert("There's no Pokemons with that Name. Try again");
       setName("");
     }
   };

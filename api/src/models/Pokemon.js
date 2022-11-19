@@ -18,26 +18,32 @@ module.exports = (sequelize) => {
     hp: {
       type: DataTypes.INTEGER,
       defaultValue: 25,
+      allowNull: true,
     },
     attack: {
       type: DataTypes.INTEGER,
       defaultValue: 25,
+      allowNull: true,
     },
     defence: {
       type: DataTypes.INTEGER,
       defaultValue: 25,
+      allowNull: true,
     },
     speed: {
       type: DataTypes.INTEGER,
       defaultValue: 25,
+      allowNull: true,
     },
     height: {
       type: DataTypes.INTEGER,
       defaultValue: 5,
+      allowNull: true,
     },
     weight: {
       type: DataTypes.INTEGER,
       defaultValue: 25,
+      allowNull: true,
     },
     image: {
       type: DataTypes.STRING(1234),

@@ -46,7 +46,7 @@ const CardDetail = () => {
           <p>HEIGHT: {pokemon.height}</p>
           <p>WEIGHT: {pokemon.weight}</p>
           <img
-            src={pokemon.image !== undefined ? pokemon.image : pokebola}
+            src={pokemon.image ? pokemon.image : pokebola}
             alt="img not found"
           />
         </div>

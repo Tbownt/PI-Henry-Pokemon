@@ -86,7 +86,7 @@ const NavBar = ({ setPage, types }) => {
         <option value="created">Created</option>
         <option value="api">API</option>
       </select>
-      <button onClick={() => reset()}>↺</button>
+      <button onClick={() => reset()}>Reset Filters</button>
       <div className={styles.link}>
         <Link to={"/create"}>
           <img src={create} alt="not found" className={styles.image} />
