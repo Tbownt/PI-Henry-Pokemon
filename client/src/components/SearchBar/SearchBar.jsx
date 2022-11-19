@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPokemonByName } from "../../redux/actions/actions";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   let history = useHistory();
-  // const allPokemons = useSelector((state) => state.pokemons);
+  const allPokemons = useSelector((state) => state.pokemons);
 
   const handleInputChange = (e) => {
     setName(e.target.value);
@@ -15,9 +15,15 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getPokemonByName(name));
-    history.push(`/pokemons/${name}`);
-    setName("");
+    let match = allPokemons.find((p) => p.name === name);
+    if (match) {
+      dispatch(getPokemonByName(match.name));
+      history.push(`/pokemons/${match.name}`);
+      setName("");
+    } else {
+      alert("OOOOOOOOOOOOOO");
+      setName("");
+    }
   };
 
   return (

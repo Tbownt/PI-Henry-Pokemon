@@ -15,8 +15,8 @@ import {
 const initialState = {
     pokemons: [],
     pokemon: {},
-    filters: [],
-    types: []
+    types: [],
+    backup: []
 
 }
 
@@ -26,7 +26,8 @@ const rootReducer = (state = initialState, action) => {
 switch(action.type) {
     case GET_ALL_POKEMONS:
         return {
-        ...state, pokemons: action.payload
+        ...state, pokemons: action.payload, 
+        backup: action.payload
         }
     case CREATE_POKEMON: 
          return {
@@ -99,19 +100,24 @@ switch(action.type) {
         }
     }
     case FILTER_BY_CREATED:
-       
-       let created = state.pokemons.filter(p => typeof p.id === 'string');
-       let api = state.pokemons.filter(p => typeof p.id === 'number');
-       if(action.payload === "created") {
+        // let filtro = action.payload;
+    const filterByDb = state.pokemons.filter(p => typeof p.id === 'string')  
+    const filterByAPI = state.pokemons.filter(p => typeof p.id === 'number')  
+    if(action.payload === 'created') {
         return {
-            ...state, pokemons: created
+            ...state,pokemons: filterByDb
         }
-       } else if (action.payload === "api") {
+    } else if (action.payload === 'api') {
         return {
-            ...state, pokemons: api
+            ...state, pokemons: filterByAPI
         }
-       } 
-       break;
+    } else {
+        return {
+            ...state, pokemons: state.pokemons
+        }
+    }
+ 
+    
     case RESET_FILTER: 
     return {
         ...state, pokemons: []

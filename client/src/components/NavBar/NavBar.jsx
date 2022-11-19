@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   getAllPokemons,
   orderByAttack,
@@ -15,7 +15,7 @@ import { Link, useHistory } from "react-router-dom";
 const NavBar = ({ setPage, types }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const pokemons = useSelector((state) => state.pokemons);
+  const [dis, setDis] = useState(false);
 
   const handleName = (e) => {
     dispatch(orderByName(e.target.value));
@@ -32,6 +32,7 @@ const NavBar = ({ setPage, types }) => {
   const handleCreated = (e) => {
     // e.preventDefault();
     dispatch(filterByCreated(e.target.value));
+    setDis(true);
     setPage(1);
     history.push("/home");
   };
@@ -44,6 +45,7 @@ const NavBar = ({ setPage, types }) => {
 
   const reset = () => {
     dispatch(getAllPokemons());
+    setDis(false);
     setPage(1);
     history.push("/home");
   };
@@ -77,11 +79,10 @@ const NavBar = ({ setPage, types }) => {
           : null}
       </select>
       <label>Filters</label>
-      <select onChange={(e) => handleCreated(e)}>
+      <select onChange={(e) => handleCreated(e)} disabled={dis}>
         <option value="" hidden>
           Filter by
         </option>
-
         <option value="created">Created</option>
         <option value="api">API</option>
       </select>

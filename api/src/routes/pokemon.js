@@ -56,10 +56,10 @@ router.post('/', async (req, res) => {
    let assignTypes = await Promise.all(
       types.map((type) => Type.findOne({ where: { name: type } }))
     );
-    //Busco en el arreglo de types uno que coincida con los que estan almacenados en la DB
+    //Tengo que buscar en mi DB los o el type que coincida con el pokemon que voy a crear
 
    newPokemon.setTypes(assignTypes);
-   //y en esta funcion se la asigno
+   //y a mi nuevo pokemon se los seteo
    
    return res.status(201).send(`The Pokemon named: ${newPokemon.name[0].toUpperCase() + newPokemon.name.substring(1)} has been created succesfully.`);
 
@@ -118,29 +118,28 @@ router.get('/', async (req, res) => {
  res.status(200).send(getAllPokemons);
 } else {
   try {
-    let pokemonByNameDB = await Pokemon.findAll({
+    let found = await Pokemon.findOne({
       where: { name: { [Op.iLike]: `%${name}%` } }, //con el operador iLike busco por name sin problemas de keysensitive 
       include: { model: Type, attributes: ["name"] }
     })
-    let queryFromDB = pokemonByNameDB.map((element) => {
-      return {
-         id: element.id,
-         name:
-         element.name.trim().toLowerCase().charAt(0).toUpperCase() +
-         element.name.substring(1),
-         hp: element.hp,
-         attack: element.attack,
-         defense: element.defense,
-         speed: element.speed,
-         height: element.height,
-         weight: element.weight,
-         types: element.Types.map((index) => index.name),
-         image: element.image,
-      }
-    });
-   if(queryFromDB.length > 0) {
-    return res.status(200).send(queryFromDB); //aqui pregunto si mi base de datos contiene el name mediante el length y si lo tiene, lo envio
-  } else if (!queryFromDB.length > 0){
+    if(found) {
+      let foundBETTER = {
+      id: found.id,
+      name: found.name,
+      hp: found.hp,
+      attack: found.attack,
+      defense: found.defense,
+      speed: found.speed,
+      height: found.height,
+      weight: found.weight,
+      types: found.Types.map(i => i.name),
+      image: found.image
+      } 
+      return res.status(200).send(foundBETTER); //retorno mi pokemon una vez encontrado en la db
+    } else {
+
+   
+   
     let pokemonByNameAPI = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
     let queryFromAPI =  {
           id: pokemonByNameAPI.data.id,

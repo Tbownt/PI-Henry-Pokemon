@@ -1,30 +1,33 @@
 import React, { useEffect } from "react";
-
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { getPokemonById, resetState } from "../../redux/actions/actions";
-import Loading from "../Loading/Loading";
+import pokebola from "../../resources/Elementos/elementos_pagina/pokebola.png";
+// import Loading from "../Loading/Loading";
 
-const CardDetail = (props) => {
-  const idParams = props.match.params.id;
+const CardDetail = () => {
+  // const idParams = props.match.params.id;
+  const { id } = useParams();
   const dispatch = useDispatch();
   const pokemon = useSelector((state) => state.pokemon);
+  // const [show, setShow] = useState(false);
 
   const reset = () => {
     dispatch(resetState());
   };
 
   useEffect(() => {
-    // dispatch(getAllPokemons());
-    dispatch(resetState());
-    dispatch(getPokemonById(idParams));
-  }, [dispatch, idParams]);
+    // dispatch(resetState());
+    dispatch(getPokemonById(id));
+  }, [dispatch, id]);
 
   return (
     <div>
       <Link to={"/home"} onClick={() => reset()}>
         Back to Home
       </Link>
+
       {pokemon.name !== undefined ? (
         <div>
           <h2>
@@ -38,14 +41,17 @@ const CardDetail = (props) => {
           </h3>
           <h3>HP: {pokemon.hp}</h3>
           <h4>ATTACK: {pokemon.attack}</h4>
-          <p>DEFENSE: {pokemon.defense}</p>
+          <p>DEFENSE: {pokemon.defense ? pokemon.defense : 25}</p>
           <p>SPEED: {pokemon.speed}</p>
           <p>HEIGHT: {pokemon.height}</p>
           <p>WEIGHT: {pokemon.weight}</p>
-          <img src={pokemon.image} alt="img not found" />
+          <img
+            src={pokemon.image !== undefined ? pokemon.image : pokebola}
+            alt="img not found"
+          />
         </div>
       ) : (
-        <Loading />
+        <p>Not found</p>
       )}
     </div>
   );

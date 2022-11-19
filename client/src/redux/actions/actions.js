@@ -39,7 +39,7 @@ export const getPokemonByName = (name) => {
                 payload: response.data,
             });
         } catch (error) {
-            console.log(error.message)
+            return "Something went wrong. Please try again."
         }
     };
 };
@@ -76,10 +76,7 @@ export const createPokemon = (pokemon) => {
     return async function(dispatch) {
         try {
             const create = await axios.post('http://localhost:3001/pokemons', pokemon)
-            return dispatch({
-                type: CREATE_POKEMON,
-                payload: create,
-            });
+            return create
         } catch (error) {
             return "Something went wrong. Please try again."
         }
@@ -116,12 +113,7 @@ export const filterByCreated = (filter) => {
     };
 };
 
-export const resetFilter = () => {
-    return {
-    type: RESET_FILTER, 
-    payload: []
-}
-}
+
 export const resetState = () => {
     return {type: CLEAR_STATE}
 }
