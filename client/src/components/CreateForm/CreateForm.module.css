@@ -93,7 +93,7 @@ h1{
     -webkit-transform:scale(1.0);transform:scale(1.1);
 }
 input, select, button{
-    font-family: 'Questrial', 'Press Start 2P';;
+    font-family: 'Questrial', 'Press Start 2P';
     border-color: #f9db5c;
     /* color: #efb810; */
     border-radius: 5px;

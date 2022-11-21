@@ -10,7 +10,7 @@ import styles from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
 import SearchBar from "../SearchBar/SearchBar";
 // import create from "../../resources/Elementos/elementos_pagina/muestra/4.png";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const NavBar = ({ setPage, types }) => {
   const dispatch = useDispatch();

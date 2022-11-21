@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
       defaultValue: 25,
       allowNull: true,
     },
-    defence: {
+    defense: {
       type: DataTypes.INTEGER,
       defaultValue: 25,
       allowNull: true,

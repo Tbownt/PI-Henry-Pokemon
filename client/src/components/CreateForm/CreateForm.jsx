@@ -1,11 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getPokemonTypes,
-  createPokemon,
-  getAllPokemons,
-} from "../../redux/actions/actions";
+import { getPokemonTypes, createPokemon } from "../../redux/actions/actions";
 import { Link, useHistory } from "react-router-dom";
 // import create from "../../resources/Elementos/elementos_pagina/muestra/4.png";
 import logo from "../../resources/Elementos/elementos_pagina/pokebola.png";
@@ -35,7 +31,7 @@ const CreateForm = () => {
   //Efectos
   useEffect(() => {
     dispatch(getPokemonTypes());
-    dispatch(getAllPokemons());
+    // dispatch(getAllPokemons());
   }, [dispatch]);
 
   //Variables

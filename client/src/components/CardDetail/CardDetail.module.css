@@ -1,0 +1,92 @@
+.container{
+    background-image: url('../../resources/Elementos/elementos_pagina/Fondo\ Ejemplo\ Patrón\ 1.jpg');
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(1, 1200px);
+    margin: 0 auto;
+    color: #f5f5f5;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    justify-items: center;
+}
+.name{
+    font-weight: bold;
+    margin-left: 25px;
+}
+.pokedex{
+    background-color: rgb(17, 15, 15, 85%);
+    border: #f5f5f5 solid;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+}
+
+.textRight{
+    display: flex;
+    font-family: 'Questrial', 'Press Start 2P';
+    font-size: 35px;
+    width: 25%;
+    flex-direction: column;
+    line-height: 50px;
+    align-items: flex-start;
+    /* flex-wrap: wrap; */
+    margin-left: 10%;
+}
+
+.textLeft {
+    display: flex;
+    font-family: 'Questrial', 'Press Start 2P';
+    font-size: 35px;
+    flex-direction: column;
+    line-height: 50px;
+    align-items: flex-end;
+    margin-right: 10%;
+}
+
+.imageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image{
+    width: 25%;
+    margin-bottom: 5px;
+}
+.containerIcon1{
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.containerIcon2{
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 auto;
+}
+.icon{
+    width: 5%;
+}
+.link{
+    background-color: black;
+    border-radius: 15px;
+    width: 20%;
+    padding: 15px;
+    font-family: 'Press Start 2P', 'Questrial';
+    font-size: 20px;
+    color: #f5f5f5;
+    cursor: pointer;
+}
+
+.notFound{
+    font-size: 50px;
+}
