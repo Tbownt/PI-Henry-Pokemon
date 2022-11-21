@@ -10,9 +10,9 @@
     cursor: pointer;
     background: #f9db5c;
     border: 1px solid #5ccda7;
-    border-radius: 15%;
-    outline: none;
-    transition: 1s ease-in-out;
+    border-radius: 4px;
+    /* outline: none; */
+    transition: 0.2s ease-in-out;
 }
 
 .btn:hover {

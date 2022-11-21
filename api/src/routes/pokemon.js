@@ -53,6 +53,7 @@ router.post('/', async (req, res) => {
       height,
       weight,
       image,
+      createdInDb: true,
    });
 
    let assignTypes = await Promise.all(
@@ -94,6 +95,7 @@ router.get('/', async (req, res) => {
       weight: element.weight,
       types: element.Types.map((index) => index.name), //Aqui pido que me traiga los nombres de sus type de la db
       image: element.image,
+      createdInDb: true,
    }
  });
 
@@ -112,6 +114,7 @@ router.get('/', async (req, res) => {
         weight: info.data.weight,
         types: info.data.types.map((t) => t.type.name),
         image: info.data.sprites.other["official-artwork"]['front_default'],
+        createdInDb: false,
     }
  });
  
@@ -135,7 +138,8 @@ router.get('/', async (req, res) => {
       height: found.height,
       weight: found.weight,
       types: found.Types.map(i => i.name),
-      image: found.image
+      image: found.image,
+      createdInDb: true,
       } 
       return res.status(200).send(queryFromDB); //retorno mi pokemon una vez encontrado en la db
     } else {
@@ -154,6 +158,7 @@ router.get('/', async (req, res) => {
           weight: pokemonByNameAPI.data.weight,
           types: pokemonByNameAPI.data.types.map((t) => t.type.name),
           image: pokemonByNameAPI.data.sprites.other["official-artwork"]['front_default'],
+          createdInDb: false,
       }
    
    return res.status(200).send(queryFromAPI); //Si el pokemon buscado por query esta en la api, lo devuelvo
@@ -185,8 +190,8 @@ router.get("/:idPokemon", async (req, res) => {
       const formatIDpokemon = {
         id: dbPokemonID.id,
         name:
-          dbPokemonID.name.trim().toLowerCase().charAt(0).toUpperCase() +
-          dbPokemonID.name.substring(1),
+        dbPokemonID.name.trim().toLowerCase().charAt(0).toUpperCase() +
+        dbPokemonID.name.substring(1),
         hp: dbPokemonID.hp,
         attack: dbPokemonID.attack,
         defense: dbPokemonID.defense,
@@ -195,6 +200,7 @@ router.get("/:idPokemon", async (req, res) => {
         weight: dbPokemonID.weight,
         types: dbPokemonID.Types.map((t) => t.name),
         image: dbPokemonID.image,
+        createdInDb: true,
       };
 
       if (dbPokemonID) return res.status(200).json(formatIDpokemon);
@@ -218,6 +224,7 @@ router.get("/:idPokemon", async (req, res) => {
       weight: apiPokemonID.data.weight,
       types: apiPokemonID.data.types.map((t) => t.type.name),
       image: apiPokemonID.data.sprites.other["official-artwork"]['front_default'],
+      createdInDb: false,
     };
 
     return res.status(200).json(matchedPokemon);

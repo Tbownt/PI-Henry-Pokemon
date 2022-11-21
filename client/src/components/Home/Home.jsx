@@ -32,10 +32,12 @@ const Home = () => {
   return (
     <div className={styles.container}>
       {pokemons.length > 0 && (
-        <NavBar setPage={setPage} types={types} showPerPage={showPerPage} />
+        <div className={styles.containerNav}>
+          <NavBar setPage={setPage} types={types} showPerPage={showPerPage} />
+        </div>
       )}
       {shownPokemons.length > 0 ? (
-        <div className="">
+        <div className={styles.containerPagination}>
           <Pagination
             showPerPage={showPerPage}
             pokemons={pokemons.length}

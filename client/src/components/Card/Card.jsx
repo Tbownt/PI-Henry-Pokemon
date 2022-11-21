@@ -11,17 +11,21 @@ const Card = ({ id, name, image, types }) => {
       ) : (
         <img src={pokebola} alt="created in db" className={styles.image} />
       )}
-      <h2>Name: {name.charAt(0).toUpperCase() + name.substring(1)}</h2>
-      <h3>
-        Types:{" "}
-        {types
-          .map((t) => t.charAt(0).toUpperCase() + t.substring(1))
-          .join(" - ")}
-      </h3>
-      <p>More info about: </p>
-      <Link to={`/pokemons/${id}`} className={styles.link}>{`${
-        name[0].toUpperCase() + name.substring(1)
-      }`}</Link>
+      <div className={styles.name}>
+        <Link to={`/pokemons/${id}`}>
+          <h2 className={styles.name}>{name.toUpperCase()}</h2>
+        </Link>
+      </div>
+      <div className={styles.types}>
+        <h3>
+          {types
+            .map((t) => t.charAt(0).toUpperCase() + t.substring(1))
+            .join(" - ")}
+        </h3>
+      </div>
+      <div className={styles.advise}>
+        <h3>INFO</h3>
+      </div>
     </div>
   );
 };

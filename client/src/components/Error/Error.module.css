@@ -1,31 +1,47 @@
-.app{
+.container{
     display: flex;
     flex-flow: column;
-    align-items: center;
-    text-align: center;
-    background-image: url('../../resources/Elementos/elementos_pagina/Fondo\ Ejemplo\ Líneas\ 2.jpg');
+    background-image: url('../../resources/Elementos/elementos_pagina/Fondo\ Ejemplo\ Patrón\ 1.jpg');
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: cover;
-    background-position: center center;
-    padding: 4.2%;
+    margin: auto;
     min-height: 100vh;
-    
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-around;
+    flex-wrap: wrap;
 }
-.parrafo{
-    font-size: 30px;
+.fondo{
+    display: flex;
+    background-color: rgb(255, 255, 255, 80%);
+    width: 40%;
+    /* height: 50%; */
+    line-height: 50px;
+    border: solid;
+    border-radius: 45px;
+    font-size: 23px;
+    align-items: center;
+    flex-direction: column;
+}
+.texto{
+    font-family: 'Questrial', 'Press Start 2P';
+    font-size: 50px;
+    height: 0;
+    padding: 0;
+    margin-top: 20px;
+    margin-inline: auto;
 }
 .link{
     display: block;
     color: #171718;
-    margin-top: 5%;
+    padding-bottom: 5px;
 }
 .link:hover{
-    color: #F5F5F5;
+    -webkit-transform:scale(1.0);transform:scale(1.1);
     
 }
 .image{
     /* margin-top: 2.5%; */
-    width: 25%;
+    width: 40%;
     position: relative;
 }

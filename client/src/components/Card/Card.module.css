@@ -1,22 +1,53 @@
 .container{
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-columns: fit-content(100%);
-    grid-auto-columns: auto;
-    width: 50%;
-    border-radius: 30px;
-    border-color: black solid;
-    background-color: #f9db5c;
+    grid-template-columns: repeat(1, 3fr);
+    justify-items: center;
+    /* grid-template-columns: fit-content(100%); */
+    /* grid-auto-columns: auto; */
+    width: 85%;
+    border-radius: 15px;
+    /* border-color: black solid; */
+    background-image: url('../../resources/Elementos/elementos_pagina/muestra/3.png');
+    background-size: 750px 400px;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: center; 
+    font-family: 'Questrial', 'Press Start 2P';
+    font-weight: bold;
+    color: #f5f5f5;
+}
+
+.container:hover{ 
+    -webkit-transform:scale(1);transform:scale(1.1);
 }
 
 .image{
-    width: 55%;
-    border-radius: 45px;
+    width: 28%;
+    padding-left: 5%;
+    padding-top: 10%;
+    padding-bottom: 5%;
+     
+    /* padding-bottom: 25%; */
+    /* border-radius: 45px; */
 }
-
-.link{
-    color: rgb(10, 107, 10);
-}
-.link:hover{
+.name{
     color: #f5f5f5;
+    font-family:  'Press Start 2P', 'Questrial';
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 10px;
+    /* height: auto; */
+    /* width: 50%; */
+    /* margin: 0 auto; */
+}
+.advise{
+    display: flex;
+    width: 45%;
+    /* height: 20%; */
+    padding-bottom: 5%;
+    padding-right: 15px;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: flex-start;
+
 }

@@ -46,12 +46,12 @@ const CreateForm = () => {
   //Funciones controladoras
   function formValidate(input) {
     let error = {};
-    if (!input.name.trim() || input.name.length < 3) {
-      error.name = "Name require at least 3 Letters";
+    if (!input.name.trim()) {
+      error.name = "Name require at least 3 letters";
     } else if (!symbols.test(input.name.trim())) {
-      error.name = "Name only can be Letters";
+      error.name = "Name only can be letters";
     } else if (!accents.test(input.name)) {
-      error.name = "Name must not have any Accents";
+      error.name = "Name must not have any Accents or Spaces";
     }
     if (decimals.test(input.hp)) {
       error.name = "Health Points may not have a decimal number";
@@ -219,7 +219,7 @@ const CreateForm = () => {
         <button
           className={styles.btn}
           type="submit"
-          disabled={input.name.length < 3 ? true : false}
+          disabled={!input.name ? true : false}
           // hidden={!input.name ? true : false}
         >
           <span>Create</span>

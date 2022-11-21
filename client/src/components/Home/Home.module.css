@@ -1,28 +1,35 @@
 .container{
     background-image: url('../../resources/Elementos/elementos_pagina/Fondo\ Ejemplo\ Patrón\ 1.jpg');
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     background-attachment: fixed;
     background-size: cover;
     background-position: center center;
-    min-height: 100vh;
     padding: 2%;
     display: flex;
-    width: 100%;
-    height: 100%;
-    display: flex;
     flex-flow: column wrap;
-    flex-direction: column;
     align-items: center;
-    /* margin: 0 auto; */
+}
+
+
+
+.containerNav{
+    flex: 75px;
+    width: 85%;
+    /* height: 50px; */
+    display: block;
+    line-height: 25px;
+}
+
+.containerPagination{
+display: flex;
+
 }
 .cardContainer {
     width: 100%;
-    /* padding-right: 5%; */
     display: grid;
-    grid-template-columns: repeat(3, 2fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
-    padding-top: 10%;
-    padding-left: 2%;
-    padding-bottom: 5%;
-    /* margin: 0 auto; */
+    padding-top: 5%;
+    justify-items: center;
+   
 }

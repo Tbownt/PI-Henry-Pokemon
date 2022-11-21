@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   getAllPokemons,
   orderByAttack,
@@ -9,13 +9,12 @@ import {
 import styles from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
 import SearchBar from "../SearchBar/SearchBar";
-import create from "../../resources/Elementos/elementos_pagina/muestra/4.png";
+// import create from "../../resources/Elementos/elementos_pagina/muestra/4.png";
 import { Link, useHistory } from "react-router-dom";
 
 const NavBar = ({ setPage, types }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [dis, setDis] = useState(false);
 
   const handleName = (e) => {
     dispatch(orderByName(e.target.value));
@@ -32,7 +31,6 @@ const NavBar = ({ setPage, types }) => {
   const handleCreated = (e) => {
     // e.preventDefault();
     dispatch(filterByCreated(e.target.value));
-    setDis(true);
     setPage(1);
     history.push("/home");
   };
@@ -45,52 +43,63 @@ const NavBar = ({ setPage, types }) => {
 
   const reset = () => {
     dispatch(getAllPokemons());
-    setDis(false);
     setPage(1);
     history.push("/home");
   };
 
   return (
     <div className={styles.container}>
-      <SearchBar />
-      <label htmlFor="orderName">Order</label>
-      <select onChange={(e) => handleName(e)} name="orderName">
-        <option value="asc">Order by A to Z</option>
-        <option value="desc">Order by Z to A</option>
-      </select>
-      <label htmlFor="orderAttack">Order by Attack</label>
-      <select onChange={(e) => handleAttack(e)} name="orderAttack">
-        <option hidden>Order by</option>
-        <option value="AttackAsc">Order by 🡡 Attack</option>
-        <option value="AttackDesc">Order by 🡣 Attack</option>
-      </select>
-      <label htmlFor="types">Types</label>
-      <select onChange={(e) => handleType(e)} name="types">
-        <option value="types" hidden>
-          Types
-        </option>
+      <div className={styles.form}>
+        <SearchBar />
+      </div>
+      <div className={styles.order}>
+        <label htmlFor="orderName" className={styles.order}>
+          Order
+        </label>
+        <select onChange={(e) => handleName(e)} name="orderName">
+          <option value="asc">ORDER BY A TO Z</option>
+          <option value="desc">ORDER BY Z TO A </option>
+        </select>
+      </div>
+      <div className={styles.attack}>
+        <label htmlFor="orderAttack">ORDER BY ATTACK</label>
+        <select onChange={(e) => handleAttack(e)} name="orderAttack">
+          <option hidden>Order by</option>
+          <option value="AttackAsc">ORDER BY 🡡 ATTACK</option>
+          <option value="AttackDesc">ORDER by 🡣 ATTACK</option>
+        </select>
+      </div>
+      <div className={styles.types}>
+        <label htmlFor="types">TYPES</label>
+        <select onChange={(e) => handleType(e)} name="types">
+          <option value="types" hidden>
+            Types
+          </option>
 
-        {types.length > 0
-          ? types.map((type) => (
-              <option key={type.id} value={type.name}>
-                {type.name.charAt(0).toUpperCase() + type.name.substring(1)}
-              </option>
-            ))
-          : null}
-      </select>
-      <label>Filters</label>
-      <select onChange={(e) => handleCreated(e)} disabled={dis}>
-        <option value="" hidden>
-          Filter by
-        </option>
-        <option value="created">Created</option>
-        <option value="api">API</option>
-      </select>
-      <button onClick={() => reset()}>Reset Filters</button>
-      <div className={styles.link}>
-        <Link to={"/create"}>
-          <img src={create} alt="not found" className={styles.image} />
-        </Link>
+          {types.length > 0
+            ? types.map((type) => (
+                <option key={type.id} value={type.name}>
+                  {type.name.charAt(0).toUpperCase() + type.name.substring(1)}
+                </option>
+              ))
+            : null}
+        </select>
+      </div>
+      <div className={styles.filter}>
+        <label>FILTERS</label>
+        <select onChange={(e) => handleCreated(e)}>
+          <option hidden>Filter by</option>
+          <option value="created">Created</option>
+          <option value="api">API</option>
+        </select>
+      </div>
+      <button className={styles.btn} onClick={() => reset()}>
+        RESET FILTERS
+      </button>
+      <div className={styles.containerLink}>
+        <button className={styles.link} onClick={() => history.push("/create")}>
+          <header>CREATE</header>
+        </button>
       </div>
     </div>
   );

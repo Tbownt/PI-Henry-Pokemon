@@ -1,11 +1,11 @@
 
 
 .app{
-    background-image: url('../../resources/Elementos/elementos_landing/Fondo.png');
+    background-image: url('../../resources/Elementos/elementos_landing/fondogif.gif');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
+    background-size: 1920px 1200px;
+    background-position: 50%;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -15,7 +15,7 @@
 }
 
 .logo{
-    width: 65%;
+    width: 55%;
 margin-top: -13%;
 margin-left: 20%;
 margin-right: 20%;
@@ -24,7 +24,7 @@ margin-right: 20%;
 .image{
     /* background-size: contain; */
     background-position: initial;
-    width: 450px;
+    width: 350px;
     /* margin-top: 5%; */
     /* height: 25vw; */
     /* margin: 0 auto; */
