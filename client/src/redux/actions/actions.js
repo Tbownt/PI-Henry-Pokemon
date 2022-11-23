@@ -25,7 +25,7 @@ export const getAllPokemons = () => {
                 payload: response.data
             });
         } catch (error) {
-            return "Something went wrong. Please try again."
+            return console.log("Something went wrong. Please try again.", error.message)
         }
     };
 };
@@ -39,7 +39,7 @@ export const getPokemonByName = (name) => {
                 payload: response.data,
             });
         } catch (error) {
-            return "Something went wrong. Please try again."
+            return console.log("Not found", error.message)
         }
     };
 };
@@ -53,7 +53,7 @@ export const getPokemonById = (id) => {
                 payload: response.data,
             });
         } catch (error) {
-            return "Something went wrong. Please try again."
+            return console.log("Im just using another Route to render this.")
         }
     };
 };
@@ -67,7 +67,7 @@ export const getPokemonTypes = () => {
                 payload: response.data,
             })
         } catch (error) {
-            return "Something went wrong. Please try again."
+            return console.log("Something went wrong. Please try again.", error.message)
         }
     };
 };
@@ -78,7 +78,7 @@ export const createPokemon = (pokemon) => {
             const create = await axios.post('http://localhost:3001/pokemons', pokemon)
             return create
         } catch (error) {
-            return "Something went wrong. Please try again."
+            return console.error("I couldn't create that Pokemon. Please try again with a different name.", error.message)
         }
     };
 };

@@ -43,7 +43,7 @@ const CreateForm = () => {
   function formValidate(input) {
     let error = {};
     if (!input.name.trim()) {
-      error.name = "Name require at least 3 letters";
+      error.name = "Name require. can't be empty";
     } else if (!symbols.test(input.name.trim())) {
       error.name = "Name only can be letters";
     } else if (!accents.test(input.name)) {
@@ -104,10 +104,10 @@ const CreateForm = () => {
     if (!error.name) {
       dispatch(createPokemon(input));
       setInput({});
-      alert("Your Pokemon has been created!");
+      alert("Let's check out your Pokemon!");
       history.push("/home");
     } else if (error.name) {
-      alert("Name is required");
+      alert("Error. Please try again");
       setInput({});
     }
   };

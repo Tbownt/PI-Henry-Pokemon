@@ -41,8 +41,17 @@ router.post('/', async (req, res) => {
       where: {name: name.trim().toLowerCase()}
    });
    //Busco por nombre quitanle espacios y en minusculas
+   const api = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=40&offset=0")
+   const response = api.data.results?.map(elemento => axios.get(elemento.url))
+   const responseAPI = await axios.all(response)
+   const namesApi = responseAPI.map((i) => {
+    return i.data.name
+  })
+  const found = namesApi.find(poke => poke === name)
 
-   if(exists) return res.status(400).send("There's a Pokemon already with that name.");
+   if(exists || found) {
+    return res.status(400).send("There's a Pokemon already with that name.");
+  }
 
    let newPokemon = await Pokemon.create({
       name: name.trim().toLowerCase(),
@@ -205,7 +214,7 @@ router.get("/:idPokemon", async (req, res) => {
 
       if (dbPokemonID) return res.status(200).json(formatIDpokemon);
     } catch (error) {
-      return res.status(404).send("No se encontró un Pokemon con ese ID");
+      return res.status(404).send("I couldn't find any Pokemon with that ID");
     }
   }
 

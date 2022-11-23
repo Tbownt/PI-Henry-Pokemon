@@ -10,14 +10,14 @@ const SearchBar = () => {
   const allPokemons = useSelector((state) => state.pokemons);
 
   const handleInputChange = (e) => {
-    setName(e.target.value);
+    const { value } = e.target;
+    setName(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let match = allPokemons.find(
-      (p) =>
-        p.name.trim().toLocaleLowerCase() === name.trim().toLocaleLowerCase()
+      (p) => p.name.trim().toLowerCase() === name.trim().toLowerCase()
     );
     if (match) {
       dispatch(getPokemonByName(match.name));

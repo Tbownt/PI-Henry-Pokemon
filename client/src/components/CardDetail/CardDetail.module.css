@@ -86,6 +86,9 @@
     color: #f5f5f5;
     cursor: pointer;
 }
+.link:hover {
+    -webkit-transform:scale(1.0);transform:scale(1.1);
+}
 
 .notFound{
     font-size: 50px;
