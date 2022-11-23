@@ -1,7 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemonTypes, createPokemon } from "../../redux/actions/actions";
+import {
+  getPokemonTypes,
+  createPokemon,
+  getAllPokemons,
+} from "../../redux/actions/actions";
 import { Link, useHistory } from "react-router-dom";
 // import create from "../../resources/Elementos/elementos_pagina/muestra/4.png";
 import logo from "../../resources/Elementos/elementos_pagina/pokebola.png";
@@ -26,12 +30,13 @@ const CreateForm = () => {
   //Manejo de estados
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
+  const pokemons = useSelector((state) => state.pokemons);
   const history = useHistory();
 
   //Efectos
   useEffect(() => {
     dispatch(getPokemonTypes());
-    // dispatch(getAllPokemons());
+    dispatch(getAllPokemons());
   }, [dispatch]);
 
   //Variables
@@ -102,9 +107,14 @@ const CreateForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!error.name) {
+      if (pokemons.find((p) => p.name === input.name)) {
+        alert("There's already a pokemon with that name");
+        setInput({});
+        history.push("/home");
+      }
       dispatch(createPokemon(input));
       setInput({});
-      alert("Let's check out your Pokemon!");
+      alert("Let's check out ours Pokemons!");
       history.push("/home");
     } else if (error.name) {
       alert("Error. Please try again");
